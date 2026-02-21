@@ -1,5 +1,5 @@
 interface SkeletonProps {
-  className?: string;
+  className?;
   variant?: 'text' | 'circular' | 'rectangular';
 }
 

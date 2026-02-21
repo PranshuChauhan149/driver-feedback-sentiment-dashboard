@@ -1,8 +1,8 @@
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 interface ErrorStateProps {
-  title?: string;
-  message?: string;
+  title?;
+  message?;
   onRetry?: () => void;
 }
 

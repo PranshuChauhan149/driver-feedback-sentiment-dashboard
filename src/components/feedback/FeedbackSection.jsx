@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 interface FeedbackSectionProps {
   entityType: EntityType;
-  entityLabel: string;
+  entityLabel;
   value: FeedbackItem | null;
   onChange: (value: FeedbackItem) => void;
 }
@@ -35,7 +35,7 @@ export const FeedbackSection = ({
     });
   }, [rating, selectedTags, text, entityType, onChange]);
 
-  const handleRatingChange = (newRating: number) => {
+  const handleRatingChange = (newRating) => {
     setRating(newRating);
     setTouched(true);
   };

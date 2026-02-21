@@ -1,33 +1,32 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { mockApi } from './mockApi';
-import { FeedbackSubmission } from '../types';
-import { useAppStore } from '../stores/appStore';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { mockApi } from "./mockApi";
+import { useAppStore } from "../stores/appStore";
 
 export const useConfig = () => {
   return useQuery({
-    queryKey: ['config'],
+    queryKey: ["config"],
     queryFn: mockApi.getConfig,
   });
 };
 
 export const useDrivers = () => {
   return useQuery({
-    queryKey: ['drivers'],
+    queryKey: ["drivers"],
     queryFn: mockApi.getDrivers,
   });
 };
 
 export const useFeedback = () => {
   return useQuery({
-    queryKey: ['feedback'],
+    queryKey: ["feedback"],
     queryFn: mockApi.getFeedback,
     refetchInterval: 30000, // Refetch every 30 seconds for "real-time" updates
   });
 };
 
-export const useDriverDetail = (driverId: string) => {
+export const useDriverDetail = (driverId) => {
   return useQuery({
-    queryKey: ['driver', driverId],
+    queryKey: ["driver", driverId],
     queryFn: () => mockApi.getDriverDetail(driverId),
     enabled: !!driverId,
   });
@@ -35,7 +34,7 @@ export const useDriverDetail = (driverId: string) => {
 
 export const useAlerts = () => {
   return useQuery({
-    queryKey: ['alerts'],
+    queryKey: ["alerts"],
     queryFn: mockApi.getAlerts,
     refetchInterval: 60000, // Refetch every minute
   });
@@ -43,7 +42,7 @@ export const useAlerts = () => {
 
 export const useSentimentSummary = () => {
   return useQuery({
-    queryKey: ['sentimentSummary'],
+    queryKey: ["sentimentSummary"],
     queryFn: mockApi.getSentimentSummary,
     refetchInterval: 30000,
   });
@@ -54,15 +53,15 @@ export const useSubmitFeedback = () => {
   const addToast = useAppStore((state) => state.addToast);
 
   return useMutation({
-    mutationFn: (data: FeedbackSubmission) => mockApi.submitFeedback(data),
+    mutationFn: (data) => mockApi.submitFeedback(data),
     onSuccess: () => {
-      addToast('Feedback submitted successfully!', 'success');
-      queryClient.invalidateQueries({ queryKey: ['feedback'] });
-      queryClient.invalidateQueries({ queryKey: ['drivers'] });
-      queryClient.invalidateQueries({ queryKey: ['sentimentSummary'] });
+      addToast("Feedback submitted successfully!", "success");
+      queryClient.invalidateQueries({ queryKey: ["feedback"] });
+      queryClient.invalidateQueries({ queryKey: ["drivers"] });
+      queryClient.invalidateQueries({ queryKey: ["sentimentSummary"] });
     },
     onError: () => {
-      addToast('Failed to submit feedback. Please try again.', 'error');
+      addToast("Failed to submit feedback. Please try again.", "error");
     },
   });
 };

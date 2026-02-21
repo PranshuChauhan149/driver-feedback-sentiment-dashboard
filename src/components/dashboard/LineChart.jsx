@@ -11,10 +11,10 @@ import {
 
 interface LineChartProps {
   data: Array<{
-    date: string;
-    score: number;
+    date;
+    score;
   }>;
-  title: string;
+  title;
 }
 
 export const LineChart = ({ data, title }: LineChartProps) => {
@@ -49,7 +49,7 @@ export const LineChart = ({ data, title }: LineChartProps) => {
               const date = new Date(value);
               return date.toLocaleDateString();
             }}
-            formatter={(value: number) => [value.toFixed(2), 'Score']}
+            formatter={(value) => [value.toFixed(2), 'Score']}
           />
           <Legend />
           <Line

@@ -12,7 +12,7 @@ import {
 import { StarIcon } from '@heroicons/react/24/solid';
 
 export const DriverDetailPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id }>();
   const navigate = useNavigate();
   const { data: driver, isLoading, error, refetch } = useDriverDetail(id!);
 

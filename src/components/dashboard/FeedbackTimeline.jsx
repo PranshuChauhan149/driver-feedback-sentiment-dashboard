@@ -7,7 +7,7 @@ interface TimelineItemProps {
 }
 
 const TimelineItem = ({ feedback }: TimelineItemProps) => {
-  const getSentimentColor = (sentiment: string) => {
+  const getSentimentColor = (sentiment) => {
     switch (sentiment) {
       case 'positive':
         return 'bg-green-100 text-green-800 border-green-200';
@@ -20,7 +20,7 @@ const TimelineItem = ({ feedback }: TimelineItemProps) => {
     }
   };
 
-  const getEntityIcon = (entityType: string) => {
+  const getEntityIcon = (entityType) => {
     const icons: Record<string, string> = {
       driver: '🚗',
       trip: '🛣️',

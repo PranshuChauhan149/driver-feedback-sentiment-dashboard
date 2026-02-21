@@ -1,11 +1,11 @@
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 
 interface EmptyStateProps {
-  icon?: React.ReactNode;
-  title: string;
-  description?: string;
+  icon?;
+  title;
+  description?;
   action?: {
-    label: string;
+    label;
     onClick: () => void;
   };
 }

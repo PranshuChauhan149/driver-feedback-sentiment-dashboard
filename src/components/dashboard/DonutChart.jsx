@@ -2,11 +2,11 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recha
 
 interface DonutChartProps {
   data: Array<{
-    name: string;
-    value: number;
-    color: string;
+    name;
+    value;
+    color;
   }>;
-  title: string;
+  title;
 }
 
 export const DonutChart = ({ data, title }: DonutChartProps) => {
@@ -32,7 +32,7 @@ export const DonutChart = ({ data, title }: DonutChartProps) => {
             ))}
           </Pie>
           <Tooltip
-            formatter={(value: number) => [value, 'Count']}
+            formatter={(value) => [value, 'Count']}
             contentStyle={{
               backgroundColor: 'white',
               border: '1px solid #e5e7eb',
@@ -42,7 +42,7 @@ export const DonutChart = ({ data, title }: DonutChartProps) => {
           <Legend
             verticalAlign="bottom"
             height={36}
-            formatter={(value, entry: any) => (
+            formatter={(value, entry) => (
               <span className="text-sm text-gray-700">
                 {value}: {entry.payload.value}
               </span>

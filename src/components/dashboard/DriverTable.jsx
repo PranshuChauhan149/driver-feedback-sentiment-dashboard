@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface DriverTableProps {
   drivers: Driver[];
-  isLoading?: boolean;
+  isLoading?;
 }
 
 type SortField = 'name' | 'totalTrips' | 'averageScore' | 'trend';
@@ -65,7 +65,7 @@ export const DriverTable = ({ drivers, isLoading }: DriverTableProps) => {
     });
   }, [drivers, searchText, scoreFilter, sortField, sortDirection]);
 
-  const toggleRow = (driverId: string) => {
+  const toggleRow = (driverId) => {
     const newExpanded = new Set(expandedRows);
     if (newExpanded.has(driverId)) {
       newExpanded.delete(driverId);

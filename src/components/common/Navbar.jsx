@@ -8,7 +8,7 @@ import {
 export const Navbar = () => {
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200">

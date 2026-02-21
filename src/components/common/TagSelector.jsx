@@ -1,12 +1,12 @@
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 interface TagSelectorProps {
-  tags: Array<{ id: string; label: string }>;
-  selectedTags: string[];
-  onChange: (tags: string[]) => void;
-  label?: string;
-  disabled?: boolean;
-  maxSelection?: number;
+  tags: Array<{ id; label }>;
+  selectedTags[];
+  onChange: (tags[]) => void;
+  label?;
+  disabled?;
+  maxSelection?;
 }
 
 export const TagSelector = ({
@@ -17,7 +17,7 @@ export const TagSelector = ({
   disabled = false,
   maxSelection,
 }: TagSelectorProps) => {
-  const toggleTag = (tagId: string) => {
+  const toggleTag = (tagId) => {
     if (disabled) return;
 
     if (selectedTags.includes(tagId)) {
@@ -30,7 +30,7 @@ export const TagSelector = ({
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, tagId: string) => {
+  const handleKeyDown = (event: React.KeyboardEvent, tagId) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       toggleTag(tagId);

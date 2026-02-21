@@ -16,7 +16,7 @@ export const AlertBell = () => {
     setAlerts(alerts);
   }
 
-  const handleAlertClick = (driverId: string, alertId: string) => {
+  const handleAlertClick = (driverId, alertId) => {
     markAlertAsRead(alertId);
     navigate(`/driver/${driverId}`);
   };

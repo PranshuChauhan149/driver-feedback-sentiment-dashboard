@@ -3,13 +3,13 @@ import { StarIcon as StarOutlineIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 
 interface StarRatingProps {
-  value: number;
-  onChange: (value: number) => void;
-  max?: number;
-  disabled?: boolean;
+  value;
+  onChange: (value) => void;
+  max?;
+  disabled?;
   size?: 'sm' | 'md' | 'lg';
-  label?: string;
-  required?: boolean;
+  label?;
+  required?;
 }
 
 export const StarRating = ({
@@ -29,7 +29,7 @@ export const StarRating = ({
     lg: 'w-10 h-10',
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, index: number) => {
+  const handleKeyDown = (event: React.KeyboardEvent, index) => {
     if (disabled) return;
 
     if (event.key === 'Enter' || event.key === ' ') {

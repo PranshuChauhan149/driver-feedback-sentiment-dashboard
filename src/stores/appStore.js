@@ -1,46 +1,15 @@
-import { create } from 'zustand';
-import { FeatureFlags, Alert, DateRange, SentimentSummary, FilterState } from '../types';
+import { create } from "zustand";
 
-interface AppState {
-  // Feature Flags
-  featureFlags: FeatureFlags;
-  setFeatureFlags: (flags: FeatureFlags) => void;
-
-  // Alerts
-  alerts: Alert[];
-  setAlerts: (alerts: Alert[]) => void;
-  markAlertAsRead: (alertId: string) => void;
-  unreadAlertsCount: number;
-
-  // Date Range
-  selectedDateRange: DateRange;
-  setDateRange: (range: DateRange) => void;
-
-  // Sentiment Summary
-  sentimentSummary: SentimentSummary | null;
-  setSentimentSummary: (summary: SentimentSummary) => void;
-
-  // Filters
-  filters: FilterState;
-  setFilters: (filters: Partial<FilterState>) => void;
-  resetFilters: () => void;
-
-  // Toast
-  toasts: Array<{ id: string; message: string; type: 'success' | 'error' | 'info' }>;
-  addToast: (message: string, type: 'success' | 'error' | 'info') => void;
-  removeToast: (id: string) => void;
-}
-
-const defaultFilters: FilterState = {
-  entityType: 'all',
-  sentiment: 'all',
-  driverId: '',
-  dateRange: '30d',
-  searchText: '',
+const defaultFilters = {
+  entityType: "all",
+  sentiment: "all",
+  driverId: "",
+  dateRange: "30d",
+  searchText: "",
   scoreRange: [0, 5],
 };
 
-export const useAppStore = create<AppState>((set) => ({
+export const useAppStore = create((set) => ({
   // Feature Flags
   featureFlags: {
     driverFeedback: true,
@@ -60,7 +29,7 @@ export const useAppStore = create<AppState>((set) => ({
   markAlertAsRead: (alertId) =>
     set((state) => {
       const newAlerts = state.alerts.map((alert) =>
-        alert.id === alertId ? { ...alert, read: true } : alert
+        alert.id === alertId ? { ...alert, read: true } : alert,
       );
       return {
         alerts: newAlerts,
@@ -70,7 +39,7 @@ export const useAppStore = create<AppState>((set) => ({
   unreadAlertsCount: 0,
 
   // Date Range
-  selectedDateRange: '30d',
+  selectedDateRange: "30d",
   setDateRange: (range) => set({ selectedDateRange: range }),
 
   // Sentiment Summary

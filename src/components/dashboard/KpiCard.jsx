@@ -1,13 +1,13 @@
 import { DateRange } from '../../types';
 
 interface KpiCardProps {
-  title: string;
-  value: string | number;
-  subtitle?: string;
-  icon?: React.ReactNode;
+  title;
+  value | number;
+  subtitle?;
+  icon?;
   trend?: {
-    value: number;
-    isPositive: boolean;
+    value;
+    isPositive;
   };
   color?: 'primary' | 'green' | 'amber' | 'red';
 }
@@ -65,7 +65,7 @@ interface DateRangeSelectorProps {
 }
 
 export const DateRangeSelector = ({ value, onChange }: DateRangeSelectorProps) => {
-  const options: { value: DateRange; label: string }[] = [
+  const options: { value: DateRange; label }[] = [
     { value: 'today', label: 'Today' },
     { value: '7d', label: '7 Days' },
     { value: '30d', label: '30 Days' },

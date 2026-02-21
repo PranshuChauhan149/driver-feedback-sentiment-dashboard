@@ -11,10 +11,10 @@ import {
 
 interface BarChartProps {
   data: Array<{
-    tag: string;
-    count: number;
+    tag;
+    count;
   }>;
-  title: string;
+  title;
 }
 
 const COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'];
@@ -40,7 +40,7 @@ export const BarChart = ({ data, title }: BarChartProps) => {
               border: '1px solid #e5e7eb',
               borderRadius: '0.5rem',
             }}
-            formatter={(value: number) => [value, 'Count']}
+            formatter={(value) => [value, 'Count']}
           />
           <Bar dataKey="count" radius={[0, 4, 4, 0]}>
             {data.map((entry, index) => (

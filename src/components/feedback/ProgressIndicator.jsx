@@ -1,6 +1,6 @@
 interface ProgressIndicatorProps {
-  steps: string[];
-  currentStep: number;
+  steps[];
+  currentStep;
 }
 
 export const ProgressIndicator = ({ steps, currentStep }: ProgressIndicatorProps) => {
