@@ -37,7 +37,7 @@ export const StarRating = ({
   return (
     <div className="space-y-2">
       {label && (
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -63,7 +63,7 @@ export const StarRating = ({
               className={`
                 ${sizeClasses[size]}
                 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
-                ${isActive ? "text-yellow-400" : "text-gray-300"}
+                ${isActive ? "text-yellow-400" : "text-gray-300 dark:text-gray-600"}
                 transition-all duration-150 hover:scale-110
                 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded
               `}
@@ -79,7 +79,10 @@ export const StarRating = ({
         })}
       </div>
       {value > 0 && (
-        <p className="text-sm text-gray-600" aria-live="polite">
+        <p
+          className="text-sm text-gray-600 dark:text-gray-400"
+          aria-live="polite"
+        >
           {value} out of {max} stars
         </p>
       )}

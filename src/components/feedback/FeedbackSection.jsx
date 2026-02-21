@@ -25,7 +25,7 @@ export const FeedbackSection = ({
       tags: selectedTags,
       text,
     });
-  }, [rating, selectedTags, text, entityType, onChange]);
+  }, [rating, selectedTags, text, entityType]);
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
@@ -47,12 +47,12 @@ export const FeedbackSection = ({
   const showError = touched && !isValid;
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
-      <div className="border-b border-gray-200 pb-4">
-        <h3 className="text-lg font-semibold text-gray-900">
+    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 space-y-6">
+      <div className="border-b border-gray-200 dark:border-gray-700 pb-4">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
           {entityLabel} Feedback
         </h3>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Please rate your experience and select relevant tags
         </p>
       </div>
@@ -84,7 +84,7 @@ export const FeedbackSection = ({
           <div>
             <label
               htmlFor={`${entityType}-feedback-text`}
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               Additional Comments (Optional)
             </label>
@@ -94,9 +94,10 @@ export const FeedbackSection = ({
               onChange={handleTextChange}
               onBlur={handleBlur}
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg 
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg 
                        focus:ring-2 focus:ring-primary-500 focus:border-primary-500
-                       resize-none text-sm"
+                       resize-none text-sm bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100
+                       placeholder:text-gray-400 dark:placeholder:text-gray-500"
               placeholder="Share more details about your experience..."
               aria-describedby={`${entityType}-char-count`}
             />
@@ -104,7 +105,7 @@ export const FeedbackSection = ({
               id={`${entityType}-char-count`}
               className="flex justify-between items-center mt-1"
             >
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-gray-500 dark:text-gray-400">
                 {text.length} / {MAX_CHARS} characters
               </span>
             </div>

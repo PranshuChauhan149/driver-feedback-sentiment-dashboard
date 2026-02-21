@@ -13,8 +13,10 @@ const COLORS = ["#6366f1", "#8b5cf6", "#ec4899", "#f59e0b", "#10b981"];
 
 export const BarChart = ({ data, title }) => {
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        {title}
+      </h3>
       <ResponsiveContainer width="100%" height={300}>
         <RechartsBarChart data={data} layout="vertical">
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />

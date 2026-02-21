@@ -11,8 +11,10 @@ import {
 
 export const LineChart = ({ data, title }) => {
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        {title}
+      </h3>
       <ResponsiveContainer width="100%" height={300}>
         <RechartsLineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />

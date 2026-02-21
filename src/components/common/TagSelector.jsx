@@ -31,7 +31,7 @@ export const TagSelector = ({
   return (
     <div className="space-y-2">
       {label && (
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           {label}
         </label>
       )}
@@ -64,7 +64,7 @@ export const TagSelector = ({
                 ${
                   isSelected
                     ? "bg-primary-600 text-white hover:bg-primary-700"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }
                 ${isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
               `}
@@ -80,7 +80,7 @@ export const TagSelector = ({
         })}
       </div>
       {maxSelection && (
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-gray-500 dark:text-gray-400">
           {selectedTags.length} / {maxSelection} selected
         </p>
       )}

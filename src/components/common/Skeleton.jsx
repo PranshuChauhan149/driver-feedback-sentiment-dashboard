@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
+
 export const Skeleton = ({ className = "", variant = "rectangular" }) => {
-  const baseClasses = "animate-pulse bg-gray-200";
+  const baseClasses = "bg-gray-200 dark:bg-gray-700";
 
   const variantClasses = {
     text: "h-4 rounded",
@@ -8,12 +10,16 @@ export const Skeleton = ({ className = "", variant = "rectangular" }) => {
   };
 
   return (
-    <div className={`${baseClasses} ${variantClasses[variant]} ${className}`} />
+    <motion.div
+      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+      animate={{ opacity: [0.6, 1, 0.6] }}
+      transition={{ duration: 1.2, repeat: Infinity }}
+    />
   );
 };
 
 export const CardSkeleton = () => (
-  <div className="bg-white p-6 rounded-lg shadow">
+  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
     <Skeleton className="h-6 w-32 mb-4" />
     <Skeleton className="h-10 w-20 mb-2" />
     <Skeleton className="h-4 w-24" />
@@ -41,7 +47,7 @@ export const TableRowSkeleton = () => (
 );
 
 export const ChartSkeleton = () => (
-  <div className="bg-white p-6 rounded-lg shadow">
+  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
     <Skeleton className="h-6 w-40 mb-6" />
     <Skeleton className="h-64 w-full" />
   </div>

@@ -113,12 +113,12 @@ export const FeedbackPage = () => {
   if (isSubmitted) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-12">
-        <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center">
           <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             Thank you for your feedback!
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Your responses have been submitted successfully and will help us
             improve our services.
           </p>
@@ -152,10 +152,10 @@ export const FeedbackPage = () => {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
           Post-Trip Feedback
         </h1>
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-400">
           Help us improve by sharing your experience
         </p>
       </div>
@@ -175,7 +175,7 @@ export const FeedbackPage = () => {
         <button
           onClick={handlePrevious}
           disabled={currentStep === 0}
-          className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 
+          className="px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 
                    disabled:opacity-50 disabled:cursor-not-allowed
                    focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2
                    transition-colors duration-150"
@@ -183,7 +183,7 @@ export const FeedbackPage = () => {
           Previous
         </button>
 
-        <div className="text-sm text-gray-600">
+        <div className="text-sm text-gray-600 dark:text-gray-400">
           Step {currentStep + 1} of {steps.length}
         </div>
 

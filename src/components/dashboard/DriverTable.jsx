@@ -70,19 +70,21 @@ export const DriverTable = ({ drivers, isLoading }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case "excellent":
-        return "bg-green-50 text-green-700 border-green-200";
+        return "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-200 dark:border-green-800";
       case "good":
-        return "bg-blue-50 text-blue-700 border-blue-200";
+        return "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-200 dark:border-blue-800";
       case "warning":
-        return "bg-amber-50 text-amber-700 border-amber-200";
+        return "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-200 dark:border-amber-800";
       case "alert":
-        return "bg-red-50 text-red-700 border-red-200";
+        return "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-200 dark:border-red-800";
     }
   };
 
   const SortIcon = ({ field }) => {
     if (sortField !== field) {
-      return <ChevronUpDownIcon className="w-4 h-4 text-gray-400" />;
+      return (
+        <ChevronUpDownIcon className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+      );
     }
     return sortDirection === "asc" ? (
       <ChevronUpIcon className="w-4 h-4 text-primary-600" />
@@ -92,8 +94,8 @@ export const DriverTable = ({ drivers, isLoading }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow">
-      <div className="p-4 border-b border-gray-200">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex flex-col sm:flex-row gap-4 justify-between">
           <div className="relative flex-1 max-w-md">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -102,8 +104,9 @@ export const DriverTable = ({ drivers, isLoading }) => {
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               placeholder="Search by name or ID..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg 
-                       focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg 
+                       focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+                       bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               aria-label="Search drivers"
             />
           </div>
@@ -117,7 +120,7 @@ export const DriverTable = ({ drivers, isLoading }) => {
                   ${
                     scoreFilter === filter
                       ? "bg-primary-600 text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                   }
                 `}
               >
@@ -136,26 +139,26 @@ export const DriverTable = ({ drivers, isLoading }) => {
 
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
             <tr>
               <th className="px-6 py-3 text-left">
                 <button
                   onClick={() => handleSort("name")}
-                  className="flex items-center gap-1 text-xs font-medium text-gray-700 uppercase tracking-wider hover:text-gray-900"
+                  className="flex items-center gap-1 text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider hover:text-gray-900 dark:hover:text-white"
                 >
                   Driver
                   <SortIcon field="name" />
                 </button>
               </th>
               <th className="px-6 py-3 text-left">
-                <span className="text-xs font-medium text-gray-700 uppercase tracking-wider">
+                <span className="text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                   Driver ID
                 </span>
               </th>
               <th className="px-6 py-3 text-left">
                 <button
                   onClick={() => handleSort("totalTrips")}
-                  className="flex items-center gap-1 text-xs font-medium text-gray-700 uppercase tracking-wider hover:text-gray-900"
+                  className="flex items-center gap-1 text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider hover:text-gray-900 dark:hover:text-white"
                 >
                   Total Trips
                   <SortIcon field="totalTrips" />
@@ -164,7 +167,7 @@ export const DriverTable = ({ drivers, isLoading }) => {
               <th className="px-6 py-3 text-left">
                 <button
                   onClick={() => handleSort("averageScore")}
-                  className="flex items-center gap-1 text-xs font-medium text-gray-700 uppercase tracking-wider hover:text-gray-900"
+                  className="flex items-center gap-1 text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider hover:text-gray-900 dark:hover:text-white"
                 >
                   Avg Score
                   <SortIcon field="averageScore" />
@@ -173,47 +176,49 @@ export const DriverTable = ({ drivers, isLoading }) => {
               <th className="px-6 py-3 text-left">
                 <button
                   onClick={() => handleSort("trend")}
-                  className="flex items-center gap-1 text-xs font-medium text-gray-700 uppercase tracking-wider hover:text-gray-900"
+                  className="flex items-center gap-1 text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider hover:text-gray-900 dark:hover:text-white"
                 >
                   Trend
                   <SortIcon field="trend" />
                 </button>
               </th>
               <th className="px-6 py-3 text-left">
-                <span className="text-xs font-medium text-gray-700 uppercase tracking-wider">
+                <span className="text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                   Actions
                 </span>
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
             {filteredAndSortedDrivers.map((driver) => {
               const isExpanded = expandedRows.has(driver.id);
               return (
                 <tr
                   key={driver.id}
                   className={`
-                    hover:bg-gray-50 transition-colors cursor-pointer
+                    hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer
                     ${getStatusColor(driver.status)}
                   `}
                   onClick={() => navigate(`/driver/${driver.id}`)}
                 >
                   <td className="px-6 py-4">
-                    <div className="font-medium text-gray-900">
+                    <div className="font-medium text-gray-900 dark:text-gray-100">
                       {driver.name}
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm text-gray-600">{driver.id}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                      {driver.id}
+                    </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm text-gray-900">
+                    <div className="text-sm text-gray-900 dark:text-gray-100">
                       {driver.totalTrips}
                     </div>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-gray-900">
+                      <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         {driver.averageScore.toFixed(2)}
                       </span>
                       <div className="flex gap-0.5">
@@ -223,7 +228,7 @@ export const DriverTable = ({ drivers, isLoading }) => {
                             className={`w-1.5 h-1.5 rounded-full ${
                               i < Math.round(driver.averageScore)
                                 ? "bg-yellow-400"
-                                : "bg-gray-300"
+                                : "bg-gray-300 dark:bg-gray-600"
                             }`}
                           />
                         ))}
@@ -246,7 +251,7 @@ export const DriverTable = ({ drivers, isLoading }) => {
                         e.stopPropagation();
                         navigate(`/driver/${driver.id}`);
                       }}
-                      className="text-sm text-primary-600 hover:text-primary-800 font-medium"
+                      className="text-sm text-primary-600 hover:text-primary-800 dark:hover:text-primary-400 font-medium"
                     >
                       View Details
                     </button>

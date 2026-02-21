@@ -1,5 +1,10 @@
 import { create } from "zustand";
 
+const getInitialTheme = () => {
+  if (typeof window === "undefined") return "light";
+  return localStorage.getItem("theme") || "light";
+};
+
 const defaultFilters = {
   entityType: "all",
   sentiment: "all",
@@ -53,6 +58,23 @@ export const useAppStore = create((set) => ({
       filters: { ...state.filters, ...newFilters },
     })),
   resetFilters: () => set({ filters: defaultFilters }),
+
+  // Theme (Dark/Light Mode)
+  theme: getInitialTheme(),
+  setTheme: (newTheme) => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", newTheme);
+    }
+    set({ theme: newTheme });
+  },
+  toggleTheme: () =>
+    set((state) => {
+      const newTheme = state.theme === "light" ? "dark" : "light";
+      if (typeof window !== "undefined") {
+        localStorage.setItem("theme", newTheme);
+      }
+      return { theme: newTheme };
+    }),
 
   // Toast
   toasts: [],

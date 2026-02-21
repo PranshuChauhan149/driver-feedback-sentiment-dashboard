@@ -17,8 +17,8 @@ export const ProgressIndicator = ({ steps, currentStep }) => {
                       isCompleted
                         ? "bg-primary-600 text-white"
                         : isCurrent
-                          ? "bg-primary-100 text-primary-700 ring-4 ring-primary-50"
-                          : "bg-gray-200 text-gray-500"
+                          ? "bg-primary-100 text-primary-700 ring-4 ring-primary-50 dark:bg-primary-900/40 dark:text-primary-200 dark:ring-primary-900/30"
+                          : "bg-gray-200 text-gray-500 dark:bg-gray-800 dark:text-gray-400"
                     }
                   `}
                   aria-current={isCurrent ? "step" : undefined}
@@ -28,7 +28,7 @@ export const ProgressIndicator = ({ steps, currentStep }) => {
                 <span
                   className={`
                     text-xs mt-2 text-center font-medium
-                    ${isCurrent ? "text-primary-700" : "text-gray-500"}
+                    ${isCurrent ? "text-primary-700 dark:text-primary-200" : "text-gray-500 dark:text-gray-400"}
                   `}
                 >
                   {step}
@@ -38,7 +38,7 @@ export const ProgressIndicator = ({ steps, currentStep }) => {
                 <div
                   className={`
                     h-1 flex-1 mx-2 rounded transition-colors duration-200
-                    ${isCompleted ? "bg-primary-600" : "bg-gray-200"}
+                    ${isCompleted ? "bg-primary-600" : "bg-gray-200 dark:bg-gray-800"}
                   `}
                   style={{ marginTop: "-2rem" }}
                 />

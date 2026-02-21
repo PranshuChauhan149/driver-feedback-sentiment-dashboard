@@ -1,19 +1,33 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from './lib/queryClient';
-import { Navbar } from './components/common/Navbar';
-import { ToastContainer } from './components/common/Toast';
-import { lazy, Suspense } from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/queryClient";
+import { Navbar } from "./components/common/Navbar";
+import { ToastContainer } from "./components/common/Toast";
+import { lazy, Suspense, useEffect } from "react";
+import { useAppStore } from "./stores/appStore";
+import { AnimatePresence, motion } from "framer-motion";
 
 // Lazy load pages for code splitting
 const DashboardPage = lazy(() =>
-  import('./pages/DashboardPage').then((module) => ({ default: module.DashboardPage }))
+  import("./pages/DashboardPage").then((module) => ({
+    default: module.DashboardPage,
+  })),
 );
 const FeedbackPage = lazy(() =>
-  import('./pages/FeedbackPage').then((module) => ({ default: module.FeedbackPage }))
+  import("./pages/FeedbackPage").then((module) => ({
+    default: module.FeedbackPage,
+  })),
 );
 const DriverDetailPage = lazy(() =>
-  import('./pages/DriverDetailPage').then((module) => ({ default: module.DriverDetailPage }))
+  import("./pages/DriverDetailPage").then((module) => ({
+    default: module.DriverDetailPage,
+  })),
 );
 
 const LoadingFallback = () => (
@@ -22,21 +36,74 @@ const LoadingFallback = () => (
   </div>
 );
 
+const PageTransition = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -12 }}
+    transition={{ duration: 0.2, ease: "easeOut" }}
+  >
+    {children}
+  </motion.div>
+);
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PageTransition>
+              <DashboardPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/feedback"
+          element={
+            <PageTransition>
+              <FeedbackPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/driver/:id"
+          element={
+            <PageTransition>
+              <DriverDetailPage />
+            </PageTransition>
+          }
+        />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 function App() {
+  const theme = useAppStore((state) => state.theme);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+  }, [theme]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
           <Navbar />
           <main className="pb-12">
             <Suspense fallback={<LoadingFallback />}>
-              <Routes>
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/feedback" element={<FeedbackPage />} />
-                <Route path="/driver/:id" element={<DriverDetailPage />} />
-                <Route path="*" element={<Navigate to="/dashboard" replace />} />
-              </Routes>
+              <AnimatedRoutes />
             </Suspense>
           </main>
           <ToastContainer />

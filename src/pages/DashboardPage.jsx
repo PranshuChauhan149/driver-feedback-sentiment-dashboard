@@ -1,23 +1,38 @@
-import { useDrivers, useFeedback, useSentimentSummary } from '../api/queries';
-import { KpiCard, DateRangeSelector } from '../components/dashboard/KpiCard';
-import { DonutChart } from '../components/dashboard/DonutChart';
-import { DriverTable } from '../components/dashboard/DriverTable';
-import { FeedbackTimeline } from '../components/dashboard/FeedbackTimeline';
-import { CardSkeleton, ChartSkeleton } from '../components/common/Skeleton';
-import { ErrorState } from '../components/common/ErrorState';
-import { useAppStore } from '../stores/appStore';
+import { useDrivers, useFeedback, useSentimentSummary } from "../api/queries";
+import { KpiCard, DateRangeSelector } from "../components/dashboard/KpiCard";
+import { DonutChart } from "../components/dashboard/DonutChart";
+import { DriverTable } from "../components/dashboard/DriverTable";
+import { FeedbackTimeline } from "../components/dashboard/FeedbackTimeline";
+import { CardSkeleton, ChartSkeleton } from "../components/common/Skeleton";
+import { ErrorState } from "../components/common/ErrorState";
+import { useAppStore } from "../stores/appStore";
 import {
   ChartBarIcon,
   StarIcon,
   ExclamationTriangleIcon,
   CheckCircleIcon,
-} from '@heroicons/react/24/solid';
+} from "@heroicons/react/24/solid";
 
 export const DashboardPage = () => {
-  const { data: drivers = [], isLoading: driversLoading, error: driversError, refetch: refetchDrivers } = useDrivers();
-  const { data: feedback = [], isLoading: feedbackLoading, error: feedbackError, refetch: refetchFeedback } = useFeedback();
-  const { data: summary, isLoading: summaryLoading, error: summaryError, refetch: refetchSummary } = useSentimentSummary();
-  
+  const {
+    data: drivers = [],
+    isLoading: driversLoading,
+    error: driversError,
+    refetch: refetchDrivers,
+  } = useDrivers();
+  const {
+    data: feedback = [],
+    isLoading: feedbackLoading,
+    error: feedbackError,
+    refetch: refetchFeedback,
+  } = useFeedback();
+  const {
+    data: summary,
+    isLoading: summaryLoading,
+    error: summaryError,
+    refetch: refetchSummary,
+  } = useSentimentSummary();
+
   const selectedDateRange = useAppStore((state) => state.selectedDateRange);
   const setDateRange = useAppStore((state) => state.setDateRange);
 
@@ -42,9 +57,9 @@ export const DashboardPage = () => {
 
   const sentimentData = summary
     ? [
-        { name: 'Positive', value: summary.positive, color: '#10b981' },
-        { name: 'Neutral', value: summary.neutral, color: '#6b7280' },
-        { name: 'Negative', value: summary.negative, color: '#ef4444' },
+        { name: "Positive", value: summary.positive, color: "#10b981" },
+        { name: "Neutral", value: summary.neutral, color: "#6b7280" },
+        { name: "Negative", value: summary.negative, color: "#ef4444" },
       ]
     : [];
 
@@ -52,10 +67,10 @@ export const DashboardPage = () => {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             Sentiment Dashboard
           </h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             Real-time driver feedback analytics
           </p>
         </div>
@@ -76,13 +91,13 @@ export const DashboardPage = () => {
             <KpiCard
               title="Total Feedback"
               value={summary?.total || 0}
-              subtitle={`in last ${selectedDateRange === 'today' ? 'day' : selectedDateRange}`}
+              subtitle={`in last ${selectedDateRange === "today" ? "day" : selectedDateRange}`}
               icon={<ChartBarIcon className="w-6 h-6" />}
               color="primary"
             />
             <KpiCard
               title="Average Score"
-              value={summary?.averageScore.toFixed(2) || '0.00'}
+              value={summary?.averageScore.toFixed(2) || "0.00"}
               subtitle="out of 5.0"
               icon={<StarIcon className="w-6 h-6" />}
               color="green"
@@ -119,7 +134,7 @@ export const DashboardPage = () => {
 
       {/* Driver Leaderboard */}
       <div className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Driver Leaderboard
         </h2>
         <DriverTable drivers={drivers} isLoading={driversLoading} />
@@ -127,7 +142,7 @@ export const DashboardPage = () => {
 
       {/* Feedback Timeline */}
       <div>
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           Feedback Timeline
         </h2>
         {feedbackLoading ? (

@@ -11,8 +11,10 @@ export const DonutChart = ({ data, title }) => {
   const total = data.reduce((sum, item) => sum + item.value, 0);
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+        {title}
+      </h3>
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
           <Pie
@@ -41,7 +43,7 @@ export const DonutChart = ({ data, title }) => {
             verticalAlign="bottom"
             height={36}
             formatter={(value, entry) => (
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-gray-700 dark:text-gray-300">
                 {value}: {entry.payload.value}
               </span>
             )}
