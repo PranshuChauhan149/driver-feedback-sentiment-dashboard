@@ -1,16 +1,6 @@
-import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
-interface EmptyStateProps {
-  icon?;
-  title;
-  description?;
-  action?: {
-    label;
-    onClick: () => void;
-  };
-}
-
-export const EmptyState = ({ icon, title, description, action }: EmptyStateProps) => {
+export const EmptyState = ({ icon, title, description, action }) => {
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
       <div className="text-gray-400 mb-4">

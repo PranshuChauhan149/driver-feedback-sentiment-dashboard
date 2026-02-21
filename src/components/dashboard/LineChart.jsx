@@ -7,17 +7,9 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
-} from 'recharts';
+} from "recharts";
 
-interface LineChartProps {
-  data: Array<{
-    date;
-    score;
-  }>;
-  title;
-}
-
-export const LineChart = ({ data, title }: LineChartProps) => {
+export const LineChart = ({ data, title }) => {
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
@@ -41,15 +33,15 @@ export const LineChart = ({ data, title }: LineChartProps) => {
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: 'white',
-              border: '1px solid #e5e7eb',
-              borderRadius: '0.5rem',
+              backgroundColor: "white",
+              border: "1px solid #e5e7eb",
+              borderRadius: "0.5rem",
             }}
             labelFormatter={(value) => {
               const date = new Date(value);
               return date.toLocaleDateString();
             }}
-            formatter={(value) => [value.toFixed(2), 'Score']}
+            formatter={(value) => [value.toFixed(2), "Score"]}
           />
           <Legend />
           <Line
@@ -57,7 +49,7 @@ export const LineChart = ({ data, title }: LineChartProps) => {
             dataKey="score"
             stroke="#6366f1"
             strokeWidth={2}
-            dot={{ fill: '#6366f1', r: 4 }}
+            dot={{ fill: "#6366f1", r: 4 }}
             activeDot={{ r: 6 }}
             name="Average Score"
           />

@@ -2,16 +2,6 @@ import { StarIcon } from '@heroicons/react/24/solid';
 import { StarIcon as StarOutlineIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 
-interface StarRatingProps {
-  value;
-  onChange: (value) => void;
-  max?;
-  disabled?;
-  size?: 'sm' | 'md' | 'lg';
-  label?;
-  required?;
-}
-
 export const StarRating = ({
   value,
   onChange,
@@ -20,7 +10,7 @@ export const StarRating = ({
   size = 'md',
   label,
   required = false,
-}: StarRatingProps) => {
+}) => {
   const [hoverValue, setHoverValue] = useState<number | null>(null);
 
   const sizeClasses = {

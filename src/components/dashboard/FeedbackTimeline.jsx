@@ -1,33 +1,28 @@
-import { Feedback } from '../../types';
-import { useVirtualizer } from '@tanstack/react-virtual';
-import { useRef } from 'react';
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { useRef } from "react";
 
-interface TimelineItemProps {
-  feedback: Feedback;
-}
-
-const TimelineItem = ({ feedback }: TimelineItemProps) => {
+const TimelineItem = ({ feedback }) => {
   const getSentimentColor = (sentiment) => {
     switch (sentiment) {
-      case 'positive':
-        return 'bg-green-100 text-green-800 border-green-200';
-      case 'neutral':
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-      case 'negative':
-        return 'bg-red-100 text-red-800 border-red-200';
+      case "positive":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "neutral":
+        return "bg-gray-100 text-gray-800 border-gray-200";
+      case "negative":
+        return "bg-red-100 text-red-800 border-red-200";
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
 
   const getEntityIcon = (entityType) => {
-    const icons: Record<string, string> = {
-      driver: '🚗',
-      trip: '🛣️',
-      app: '📱',
-      marshal: '👮',
+    const icons = {
+      driver: "🚗",
+      trip: "🛣️",
+      app: "📱",
+      marshal: "👮",
     };
-    return icons[entityType] || '📝';
+    return icons[entityType] || "📝";
   };
 
   return (
@@ -61,7 +56,7 @@ const TimelineItem = ({ feedback }: TimelineItemProps) => {
                 <span
                   key={i}
                   className={`text-sm ${
-                    i < feedback.rating ? 'text-yellow-400' : 'text-gray-300'
+                    i < feedback.rating ? "text-yellow-400" : "text-gray-300"
                   }`}
                 >
                   ★
@@ -103,12 +98,8 @@ const TimelineItem = ({ feedback }: TimelineItemProps) => {
   );
 };
 
-interface FeedbackTimelineProps {
-  feedback: Feedback[];
-}
-
-export const FeedbackTimeline = ({ feedback }: FeedbackTimelineProps) => {
-  const parentRef = useRef<HTMLDivElement>(null);
+export const FeedbackTimeline = ({ feedback }) => {
+  const parentRef = useRef(null);
 
   const virtualizer = useVirtualizer({
     count: feedback.length,
@@ -120,9 +111,7 @@ export const FeedbackTimeline = ({ feedback }: FeedbackTimelineProps) => {
   return (
     <div className="bg-white rounded-lg shadow">
       <div className="p-4 border-b border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-900">
-          Recent Feedback
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-900">Recent Feedback</h3>
         <p className="text-sm text-gray-500 mt-1">
           {feedback.length} total entries
         </p>
@@ -130,23 +119,23 @@ export const FeedbackTimeline = ({ feedback }: FeedbackTimelineProps) => {
       <div
         ref={parentRef}
         className="overflow-auto"
-        style={{ height: '600px' }}
+        style={{ height: "600px" }}
       >
         <div
           style={{
             height: `${virtualizer.getTotalSize()}px`,
-            width: '100%',
-            position: 'relative',
+            width: "100%",
+            position: "relative",
           }}
         >
           {virtualizer.getVirtualItems().map((virtualItem) => (
             <div
               key={virtualItem.key}
               style={{
-                position: 'absolute',
+                position: "absolute",
                 top: 0,
                 left: 0,
-                width: '100%',
+                width: "100%",
                 height: `${virtualItem.size}px`,
                 transform: `translateY(${virtualItem.start}px)`,
               }}

@@ -1,15 +1,7 @@
 import { StarRating } from '../common/StarRating';
 import { TagSelector } from '../common/TagSelector';
-import { EntityType, FeedbackItem } from '../../types';
 import { FEEDBACK_TAGS } from '../../api/mockApi';
 import { useState, useEffect } from 'react';
-
-interface FeedbackSectionProps {
-  entityType: EntityType;
-  entityLabel;
-  value: FeedbackItem | null;
-  onChange: (value: FeedbackItem) => void;
-}
 
 const MAX_CHARS = 500;
 
@@ -18,7 +10,7 @@ export const FeedbackSection = ({
   entityLabel,
   value,
   onChange,
-}: FeedbackSectionProps) => {
+}) => {
   const [rating, setRating] = useState(value?.rating || 0);
   const [selectedTags, setSelectedTags] = useState<string[]>(value?.tags || []);
   const [text, setText] = useState(value?.text || '');

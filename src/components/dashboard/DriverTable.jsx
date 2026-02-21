@@ -8,15 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 
-interface DriverTableProps {
-  drivers: Driver[];
-  isLoading?;
-}
-
-type SortField = 'name' | 'totalTrips' | 'averageScore' | 'trend';
-type SortDirection = 'asc' | 'desc';
-
-export const DriverTable = ({ drivers, isLoading }: DriverTableProps) => {
+export const DriverTable = ({ drivers, isLoading }) => {
   const navigate = useNavigate();
   const [sortField, setSortField] = useState<SortField>('averageScore');
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');

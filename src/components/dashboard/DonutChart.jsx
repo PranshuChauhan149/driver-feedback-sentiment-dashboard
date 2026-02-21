@@ -1,15 +1,13 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
 
-interface DonutChartProps {
-  data: Array<{
-    name;
-    value;
-    color;
-  }>;
-  title;
-}
-
-export const DonutChart = ({ data, title }: DonutChartProps) => {
+export const DonutChart = ({ data, title }) => {
   const total = data.reduce((sum, item) => sum + item.value, 0);
 
   return (
@@ -32,11 +30,11 @@ export const DonutChart = ({ data, title }: DonutChartProps) => {
             ))}
           </Pie>
           <Tooltip
-            formatter={(value) => [value, 'Count']}
+            formatter={(value) => [value, "Count"]}
             contentStyle={{
-              backgroundColor: 'white',
-              border: '1px solid #e5e7eb',
-              borderRadius: '0.5rem',
+              backgroundColor: "white",
+              border: "1px solid #e5e7eb",
+              borderRadius: "0.5rem",
             }}
           />
           <Legend

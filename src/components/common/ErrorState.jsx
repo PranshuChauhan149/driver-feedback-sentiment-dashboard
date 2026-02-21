@@ -1,16 +1,10 @@
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-
-interface ErrorStateProps {
-  title?;
-  message?;
-  onRetry?: () => void;
-}
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 export const ErrorState = ({
-  title = 'Something went wrong',
-  message = 'An error occurred while loading data. Please try again.',
+  title = "Something went wrong",
+  message = "An error occurred while loading data. Please try again.",
   onRetry,
-}: ErrorStateProps) => {
+}) => {
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
       <ExclamationTriangleIcon className="w-16 h-16 text-red-500 mb-4" />

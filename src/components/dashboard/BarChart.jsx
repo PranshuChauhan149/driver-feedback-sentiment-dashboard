@@ -7,19 +7,11 @@ import {
   Tooltip,
   ResponsiveContainer,
   Cell,
-} from 'recharts';
+} from "recharts";
 
-interface BarChartProps {
-  data: Array<{
-    tag;
-    count;
-  }>;
-  title;
-}
+const COLORS = ["#6366f1", "#8b5cf6", "#ec4899", "#f59e0b", "#10b981"];
 
-const COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'];
-
-export const BarChart = ({ data, title }: BarChartProps) => {
+export const BarChart = ({ data, title }) => {
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
@@ -36,15 +28,18 @@ export const BarChart = ({ data, title }: BarChartProps) => {
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: 'white',
-              border: '1px solid #e5e7eb',
-              borderRadius: '0.5rem',
+              backgroundColor: "white",
+              border: "1px solid #e5e7eb",
+              borderRadius: "0.5rem",
             }}
-            formatter={(value) => [value, 'Count']}
+            formatter={(value) => [value, "Count"]}
           />
           <Bar dataKey="count" radius={[0, 4, 4, 0]}>
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
             ))}
           </Bar>
         </RechartsBarChart>

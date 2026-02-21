@@ -1,14 +1,5 @@
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
-interface TagSelectorProps {
-  tags: Array<{ id; label }>;
-  selectedTags[];
-  onChange: (tags[]) => void;
-  label?;
-  disabled?;
-  maxSelection?;
-}
-
 export const TagSelector = ({
   tags,
   selectedTags,
@@ -16,7 +7,7 @@ export const TagSelector = ({
   label,
   disabled = false,
   maxSelection,
-}: TagSelectorProps) => {
+}) => {
   const toggleTag = (tagId) => {
     if (disabled) return;
 

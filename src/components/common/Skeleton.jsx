@@ -1,18 +1,15 @@
-interface SkeletonProps {
-  className?;
-  variant?: 'text' | 'circular' | 'rectangular';
-}
+export const Skeleton = ({ className = "", variant = "rectangular" }) => {
+  const baseClasses = "animate-pulse bg-gray-200";
 
-export const Skeleton = ({ className = '', variant = 'rectangular' }: SkeletonProps) => {
-  const baseClasses = 'animate-pulse bg-gray-200';
-  
   const variantClasses = {
-    text: 'h-4 rounded',
-    circular: 'rounded-full',
-    rectangular: 'rounded-lg',
+    text: "h-4 rounded",
+    circular: "rounded-full",
+    rectangular: "rounded-lg",
   };
 
-  return <div className={`${baseClasses} ${variantClasses[variant]} ${className}`} />;
+  return (
+    <div className={`${baseClasses} ${variantClasses[variant]} ${className}`} />
+  );
 };
 
 export const CardSkeleton = () => (
@@ -25,11 +22,21 @@ export const CardSkeleton = () => (
 
 export const TableRowSkeleton = () => (
   <tr>
-    <td className="px-6 py-4"><Skeleton className="h-4 w-32" /></td>
-    <td className="px-6 py-4"><Skeleton className="h-4 w-20" /></td>
-    <td className="px-6 py-4"><Skeleton className="h-4 w-16" /></td>
-    <td className="px-6 py-4"><Skeleton className="h-4 w-16" /></td>
-    <td className="px-6 py-4"><Skeleton className="h-4 w-12" /></td>
+    <td className="px-6 py-4">
+      <Skeleton className="h-4 w-32" />
+    </td>
+    <td className="px-6 py-4">
+      <Skeleton className="h-4 w-20" />
+    </td>
+    <td className="px-6 py-4">
+      <Skeleton className="h-4 w-16" />
+    </td>
+    <td className="px-6 py-4">
+      <Skeleton className="h-4 w-16" />
+    </td>
+    <td className="px-6 py-4">
+      <Skeleton className="h-4 w-12" />
+    </td>
   </tr>
 );
 
