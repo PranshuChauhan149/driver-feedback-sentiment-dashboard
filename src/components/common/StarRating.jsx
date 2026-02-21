@@ -11,7 +11,7 @@ export const StarRating = ({
   label,
   required = false,
 }) => {
-  const [hoverValue, setHoverValue] = (useState < number) | (null > null);
+  const [hoverValue, setHoverValue] = useState(null);
 
   const sizeClasses = {
     sm: "w-5 h-5",
