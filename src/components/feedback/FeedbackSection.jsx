@@ -1,7 +1,7 @@
-import { StarRating } from '../common/StarRating';
-import { TagSelector } from '../common/TagSelector';
-import { FEEDBACK_TAGS } from '../../api/mockApi';
-import { useState, useEffect } from 'react';
+import { StarRating } from "../common/StarRating";
+import { TagSelector } from "../common/TagSelector";
+import { FEEDBACK_TAGS } from "../../api/mockApi";
+import { useState, useEffect } from "react";
 
 const MAX_CHARS = 500;
 
@@ -12,8 +12,8 @@ export const FeedbackSection = ({
   onChange,
 }) => {
   const [rating, setRating] = useState(value?.rating || 0);
-  const [selectedTags, setSelectedTags] = useState<string[]>(value?.tags || []);
-  const [text, setText] = useState(value?.text || '');
+  const [selectedTags, setSelectedTags] = useState(value?.tags || []);
+  const [text, setText] = useState(value?.text || "");
   const [touched, setTouched] = useState(false);
 
   const tags = FEEDBACK_TAGS[entityType] || [];
@@ -49,7 +49,9 @@ export const FeedbackSection = ({
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
       <div className="border-b border-gray-200 pb-4">
-        <h3 className="text-lg font-semibold text-gray-900">{entityLabel} Feedback</h3>
+        <h3 className="text-lg font-semibold text-gray-900">
+          {entityLabel} Feedback
+        </h3>
         <p className="text-sm text-gray-500 mt-1">
           Please rate your experience and select relevant tags
         </p>

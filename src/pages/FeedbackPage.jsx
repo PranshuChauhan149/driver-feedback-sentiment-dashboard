@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useAppStore } from '../stores/appStore';
-import { useSubmitFeedback, useConfig } from '../api/queries';
-import { FeedbackSection } from '../components/feedback/FeedbackSection';
-import { ProgressIndicator } from '../components/feedback/ProgressIndicator';
-import { EmptyState } from '../components/common/EmptyState';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { useState, useEffect } from "react";
+import { useAppStore } from "../stores/appStore";
+import { useSubmitFeedback, useConfig } from "../api/queries";
+import { FeedbackSection } from "../components/feedback/FeedbackSection";
+import { ProgressIndicator } from "../components/feedback/ProgressIndicator";
+import { EmptyState } from "../components/common/EmptyState";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
 const ENTITY_LABELS = {
-  driver: 'Driver',
-  trip: 'Trip',
-  app: 'Mobile App',
-  marshal: 'Marshal',
+  driver: "Driver",
+  trip: "Trip",
+  app: "Mobile App",
+  marshal: "Marshal",
 };
 
 export const FeedbackPage = () => {
@@ -37,7 +37,7 @@ export const FeedbackPage = () => {
 
   const enabledEntities = Object.entries(featureFlags)
     .filter(([_, enabled]) => enabled)
-    .map(([key]) => key.replace('Feedback', ''));
+    .map(([key]) => key.replace("Feedback", ""));
 
   const steps = enabledEntities.map((entity) => ENTITY_LABELS[entity]);
 
@@ -79,13 +79,15 @@ export const FeedbackPage = () => {
       await submitMutation.mutateAsync({
         feedbackItems,
         tripId: `TRIP${Date.now()}`,
-        driverId: feedbackItems.find((f) => f.entityType === 'driver') ? 'DRV0001' : undefined,
+        driverId: feedbackItems.find((f) => f.entityType === "driver")
+          ? "DRV0001"
+          : undefined,
         timestamp: new Date().toISOString(),
       });
       setIsSubmitted(true);
       setHasSubmitted(true);
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error("Submission error:", error);
     }
   };
 
@@ -117,7 +119,8 @@ export const FeedbackPage = () => {
             Thank you for your feedback!
           </h2>
           <p className="text-gray-600 mb-6">
-            Your responses have been submitted successfully and will help us improve our services.
+            Your responses have been submitted successfully and will help us
+            improve our services.
           </p>
           <button
             onClick={() => {
@@ -199,7 +202,7 @@ export const FeedbackPage = () => {
                 Submitting...
               </>
             ) : (
-              'Submit Feedback'
+              "Submit Feedback"
             )}
           </button>
         ) : (
