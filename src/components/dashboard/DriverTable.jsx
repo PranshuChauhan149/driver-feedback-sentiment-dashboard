@@ -1,27 +1,26 @@
-import { useState, useMemo } from 'react';
-import { Driver } from '../../types';
+import { useState, useMemo } from "react";
 import {
   ChevronUpIcon,
   ChevronDownIcon,
   ChevronUpDownIcon,
   MagnifyingGlassIcon,
-} from '@heroicons/react/24/outline';
-import { useNavigate } from 'react-router-dom';
+} from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 export const DriverTable = ({ drivers, isLoading }) => {
   const navigate = useNavigate();
-  const [sortField, setSortField] = useState<SortField>('averageScore');
-  const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
-  const [searchText, setSearchText] = useState('');
-  const [scoreFilter, setScoreFilter] = useState<'all' | 'high' | 'medium' | 'low'>('all');
-  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
+  const [sortField, setSortField] = useState("averageScore");
+  const [sortDirection, setSortDirection] = useState("desc");
+  const [searchText, setSearchText] = useState("");
+  const [scoreFilter, setScoreFilter] = useState("all");
+  const [expandedRows, setExpandedRows] = useState(new Set());
 
-  const handleSort = (field: SortField) => {
+  const handleSort = (field) => {
     if (sortField === field) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortField(field);
-      setSortDirection('desc');
+      setSortDirection("desc");
     }
   };
 
@@ -33,24 +32,25 @@ export const DriverTable = ({ drivers, isLoading }) => {
       filtered = filtered.filter(
         (driver) =>
           driver.name.toLowerCase().includes(searchText.toLowerCase()) ||
-          driver.id.toLowerCase().includes(searchText.toLowerCase())
+          driver.id.toLowerCase().includes(searchText.toLowerCase()),
       );
     }
 
     // Score filter
-    if (scoreFilter !== 'all') {
+    if (scoreFilter !== "all") {
       filtered = filtered.filter((driver) => {
-        if (scoreFilter === 'high') return driver.averageScore >= 4.0;
-        if (scoreFilter === 'medium') return driver.averageScore >= 2.5 && driver.averageScore < 4.0;
-        if (scoreFilter === 'low') return driver.averageScore < 2.5;
+        if (scoreFilter === "high") return driver.averageScore >= 4.0;
+        if (scoreFilter === "medium")
+          return driver.averageScore >= 2.5 && driver.averageScore < 4.0;
+        if (scoreFilter === "low") return driver.averageScore < 2.5;
         return true;
       });
     }
 
     // Sort
     return [...filtered].sort((a, b) => {
-      const multiplier = sortDirection === 'asc' ? 1 : -1;
-      if (sortField === 'name') {
+      const multiplier = sortDirection === "asc" ? 1 : -1;
+      if (sortField === "name") {
         return multiplier * a.name.localeCompare(b.name);
       }
       return multiplier * (a[sortField] - b[sortField]);
@@ -67,24 +67,24 @@ export const DriverTable = ({ drivers, isLoading }) => {
     setExpandedRows(newExpanded);
   };
 
-  const getStatusColor = (status: Driver['status']) => {
+  const getStatusColor = (status) => {
     switch (status) {
-      case 'excellent':
-        return 'bg-green-50 text-green-700 border-green-200';
-      case 'good':
-        return 'bg-blue-50 text-blue-700 border-blue-200';
-      case 'warning':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
-      case 'alert':
-        return 'bg-red-50 text-red-700 border-red-200';
+      case "excellent":
+        return "bg-green-50 text-green-700 border-green-200";
+      case "good":
+        return "bg-blue-50 text-blue-700 border-blue-200";
+      case "warning":
+        return "bg-amber-50 text-amber-700 border-amber-200";
+      case "alert":
+        return "bg-red-50 text-red-700 border-red-200";
     }
   };
 
-  const SortIcon = ({ field }: { field: SortField }) => {
+  const SortIcon = ({ field }) => {
     if (sortField !== field) {
       return <ChevronUpDownIcon className="w-4 h-4 text-gray-400" />;
     }
-    return sortDirection === 'asc' ? (
+    return sortDirection === "asc" ? (
       <ChevronUpIcon className="w-4 h-4 text-primary-600" />
     ) : (
       <ChevronDownIcon className="w-4 h-4 text-primary-600" />
@@ -108,20 +108,26 @@ export const DriverTable = ({ drivers, isLoading }) => {
             />
           </div>
           <div className="flex gap-2">
-            {['all', 'high', 'medium', 'low'].map((filter) => (
+            {["all", "high", "medium", "low"].map((filter) => (
               <button
                 key={filter}
-                onClick={() => setScoreFilter(filter as typeof scoreFilter)}
+                onClick={() => setScoreFilter(filter)}
                 className={`
                   px-3 py-2 text-sm font-medium rounded-lg transition-colors
                   ${
                     scoreFilter === filter
-                      ? 'bg-primary-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? "bg-primary-600 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }
                 `}
               >
-                {filter === 'all' ? 'All' : filter === 'high' ? '≥ 4.0' : filter === 'medium' ? '2.5-3.9' : '< 2.5'}
+                {filter === "all"
+                  ? "All"
+                  : filter === "high"
+                    ? "≥ 4.0"
+                    : filter === "medium"
+                      ? "2.5-3.9"
+                      : "< 2.5"}
               </button>
             ))}
           </div>
@@ -134,7 +140,7 @@ export const DriverTable = ({ drivers, isLoading }) => {
             <tr>
               <th className="px-6 py-3 text-left">
                 <button
-                  onClick={() => handleSort('name')}
+                  onClick={() => handleSort("name")}
                   className="flex items-center gap-1 text-xs font-medium text-gray-700 uppercase tracking-wider hover:text-gray-900"
                 >
                   Driver
@@ -148,7 +154,7 @@ export const DriverTable = ({ drivers, isLoading }) => {
               </th>
               <th className="px-6 py-3 text-left">
                 <button
-                  onClick={() => handleSort('totalTrips')}
+                  onClick={() => handleSort("totalTrips")}
                   className="flex items-center gap-1 text-xs font-medium text-gray-700 uppercase tracking-wider hover:text-gray-900"
                 >
                   Total Trips
@@ -157,7 +163,7 @@ export const DriverTable = ({ drivers, isLoading }) => {
               </th>
               <th className="px-6 py-3 text-left">
                 <button
-                  onClick={() => handleSort('averageScore')}
+                  onClick={() => handleSort("averageScore")}
                   className="flex items-center gap-1 text-xs font-medium text-gray-700 uppercase tracking-wider hover:text-gray-900"
                 >
                   Avg Score
@@ -166,7 +172,7 @@ export const DriverTable = ({ drivers, isLoading }) => {
               </th>
               <th className="px-6 py-3 text-left">
                 <button
-                  onClick={() => handleSort('trend')}
+                  onClick={() => handleSort("trend")}
                   className="flex items-center gap-1 text-xs font-medium text-gray-700 uppercase tracking-wider hover:text-gray-900"
                 >
                   Trend
@@ -193,13 +199,17 @@ export const DriverTable = ({ drivers, isLoading }) => {
                   onClick={() => navigate(`/driver/${driver.id}`)}
                 >
                   <td className="px-6 py-4">
-                    <div className="font-medium text-gray-900">{driver.name}</div>
+                    <div className="font-medium text-gray-900">
+                      {driver.name}
+                    </div>
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm text-gray-600">{driver.id}</div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm text-gray-900">{driver.totalTrips}</div>
+                    <div className="text-sm text-gray-900">
+                      {driver.totalTrips}
+                    </div>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
@@ -212,8 +222,8 @@ export const DriverTable = ({ drivers, isLoading }) => {
                             key={i}
                             className={`w-1.5 h-1.5 rounded-full ${
                               i < Math.round(driver.averageScore)
-                                ? 'bg-yellow-400'
-                                : 'bg-gray-300'
+                                ? "bg-yellow-400"
+                                : "bg-gray-300"
                             }`}
                           />
                         ))}
@@ -223,10 +233,11 @@ export const DriverTable = ({ drivers, isLoading }) => {
                   <td className="px-6 py-4">
                     <div
                       className={`text-sm font-medium ${
-                        driver.trend >= 0 ? 'text-green-600' : 'text-red-600'
+                        driver.trend >= 0 ? "text-green-600" : "text-red-600"
                       }`}
                     >
-                      {driver.trend >= 0 ? '↑' : '↓'} {Math.abs(driver.trend).toFixed(1)}%
+                      {driver.trend >= 0 ? "↑" : "↓"}{" "}
+                      {Math.abs(driver.trend).toFixed(1)}%
                     </div>
                   </td>
                   <td className="px-6 py-4">

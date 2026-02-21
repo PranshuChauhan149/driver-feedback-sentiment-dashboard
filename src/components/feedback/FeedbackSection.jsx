@@ -32,7 +32,7 @@ export const FeedbackSection = ({
     setTouched(true);
   };
 
-  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleTextChange = (e) => {
     const newText = e.target.value;
     if (newText.length <= MAX_CHARS) {
       setText(newText);

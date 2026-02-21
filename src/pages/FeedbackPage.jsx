@@ -5,9 +5,8 @@ import { FeedbackSection } from '../components/feedback/FeedbackSection';
 import { ProgressIndicator } from '../components/feedback/ProgressIndicator';
 import { EmptyState } from '../components/common/EmptyState';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
-import { FeedbackItem, EntityType } from '../types';
 
-const ENTITY_LABELS: Record<EntityType, string> = {
+const ENTITY_LABELS = {
   driver: 'Driver',
   trip: 'Trip',
   app: 'Mobile App',
@@ -42,7 +41,7 @@ export const FeedbackPage = () => {
 
   const steps = enabledEntities.map((entity) => ENTITY_LABELS[entity]);
 
-  const handleFeedbackChange = (entity: EntityType, value: FeedbackItem) => {
+  const handleFeedbackChange = (entity, value) => {
     setFeedbackData((prev) => ({
       ...prev,
       [entity]: value,
@@ -72,7 +71,7 @@ export const FeedbackPage = () => {
 
     const feedbackItems = enabledEntities
       .map((entity) => feedbackData[entity])
-      .filter((item): item is FeedbackItem => item !== null && item.rating > 0);
+      .filter((item) => item !== null && item.rating > 0);
 
     if (feedbackItems.length === 0) return;
 

@@ -1,20 +1,20 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useDriverDetail } from '../api/queries';
-import { LineChart } from '../components/dashboard/LineChart';
-import { BarChart } from '../components/dashboard/BarChart';
-import { ChartSkeleton } from '../components/common/Skeleton';
-import { ErrorState } from '../components/common/ErrorState';
+import { useParams, useNavigate } from "react-router-dom";
+import { useDriverDetail } from "../api/queries";
+import { LineChart } from "../components/dashboard/LineChart";
+import { BarChart } from "../components/dashboard/BarChart";
+import { ChartSkeleton } from "../components/common/Skeleton";
+import { ErrorState } from "../components/common/ErrorState";
 import {
   ArrowLeftIcon,
   ExclamationTriangleIcon,
   CheckCircleIcon,
-} from '@heroicons/react/24/outline';
-import { StarIcon } from '@heroicons/react/24/solid';
+} from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/solid";
 
 export const DriverDetailPage = () => {
-  const { id } = useParams<{ id }>();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { data: driver, isLoading, error, refetch } = useDriverDetail(id!);
+  const { data: driver, isLoading, error, refetch } = useDriverDetail(id);
 
   if (isLoading) {
     return (
@@ -70,7 +70,7 @@ export const DriverDetailPage = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <button
-        onClick={() => navigate('/dashboard')}
+        onClick={() => navigate("/dashboard")}
         className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6
                  focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg px-2 py-1"
       >
@@ -83,7 +83,9 @@ export const DriverDetailPage = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <h1 className="text-3xl font-bold text-gray-900">{driver.name}</h1>
+              <h1 className="text-3xl font-bold text-gray-900">
+                {driver.name}
+              </h1>
               {getStatusBadge()}
             </div>
             <p className="text-gray-600">Driver ID: {driver.id}</p>
@@ -95,13 +97,16 @@ export const DriverDetailPage = () => {
                 {driver.averageScore.toFixed(2)}
               </span>
             </div>
-            <p className="text-sm text-gray-600">{driver.totalTrips} total trips</p>
+            <p className="text-sm text-gray-600">
+              {driver.totalTrips} total trips
+            </p>
             <p
               className={`text-sm font-medium ${
-                driver.trend >= 0 ? 'text-green-600' : 'text-red-600'
+                driver.trend >= 0 ? "text-green-600" : "text-red-600"
               }`}
             >
-              {driver.trend >= 0 ? '↑' : '↓'} {Math.abs(driver.trend).toFixed(1)}% vs last week
+              {driver.trend >= 0 ? "↑" : "↓"}{" "}
+              {Math.abs(driver.trend).toFixed(1)}% vs last week
             </p>
           </div>
         </div>
@@ -162,7 +167,9 @@ export const DriverDetailPage = () => {
                         <span
                           key={i}
                           className={`text-sm ${
-                            i < feedback.rating ? 'text-yellow-400' : 'text-gray-300'
+                            i < feedback.rating
+                              ? "text-yellow-400"
+                              : "text-gray-300"
                           }`}
                         >
                           ★
@@ -175,11 +182,11 @@ export const DriverDetailPage = () => {
                       className={`
                         px-2 py-1 text-xs font-medium rounded-full
                         ${
-                          feedback.sentiment === 'positive'
-                            ? 'bg-green-100 text-green-800'
-                            : feedback.sentiment === 'negative'
-                            ? 'bg-red-100 text-red-800'
-                            : 'bg-gray-100 text-gray-800'
+                          feedback.sentiment === "positive"
+                            ? "bg-green-100 text-green-800"
+                            : feedback.sentiment === "negative"
+                              ? "bg-red-100 text-red-800"
+                              : "bg-gray-100 text-gray-800"
                         }
                       `}
                     >
@@ -204,7 +211,7 @@ export const DriverDetailPage = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-700 max-w-md">
-                    <p className="line-clamp-2">{feedback.text || '-'}</p>
+                    <p className="line-clamp-2">{feedback.text || "-"}</p>
                   </td>
                 </tr>
               ))}

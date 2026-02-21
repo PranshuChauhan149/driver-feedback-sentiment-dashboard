@@ -1,4 +1,4 @@
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export const TagSelector = ({
   tags,
@@ -21,8 +21,8 @@ export const TagSelector = ({
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, tagId) => {
-    if (event.key === 'Enter' || event.key === ' ') {
+  const handleKeyDown = (event, tagId) => {
+    if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       toggleTag(tagId);
     }
@@ -35,10 +35,18 @@ export const TagSelector = ({
           {label}
         </label>
       )}
-      <div className="flex flex-wrap gap-2" role="group" aria-label={label || 'Tag selection'}>
+      <div
+        className="flex flex-wrap gap-2"
+        role="group"
+        aria-label={label || "Tag selection"}
+      >
         {tags.map((tag) => {
           const isSelected = selectedTags.includes(tag.id);
-          const isDisabled = disabled || (maxSelection ? selectedTags.length >= maxSelection && !isSelected : false);
+          const isDisabled =
+            disabled ||
+            (maxSelection
+              ? selectedTags.length >= maxSelection && !isSelected
+              : false);
 
           return (
             <button
@@ -55,10 +63,10 @@ export const TagSelector = ({
                 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
                 ${
                   isSelected
-                    ? 'bg-primary-600 text-white hover:bg-primary-700'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? "bg-primary-600 text-white hover:bg-primary-700"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }
-                ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+                ${isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
               `}
             >
               <span className="flex items-center gap-1.5">
