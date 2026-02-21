@@ -96,8 +96,14 @@ export const DriverTable = ({ drivers, isLoading }) => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-        <div className="flex flex-col sm:flex-row gap-4 justify-between">
-          <div className="relative flex-1 max-w-md">
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {filteredAndSortedDrivers.length} total entries
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-between">
+            <div className="relative flex-1 max-w-md">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               type="text"
@@ -109,8 +115,8 @@ export const DriverTable = ({ drivers, isLoading }) => {
                        bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               aria-label="Search drivers"
             />
-          </div>
-          <div className="flex gap-2">
+            </div>
+            <div className="flex gap-2">
             {["all", "high", "medium", "low"].map((filter) => (
               <button
                 key={filter}
@@ -133,13 +139,14 @@ export const DriverTable = ({ drivers, isLoading }) => {
                       : "< 2.5"}
               </button>
             ))}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto max-h-[520px] overflow-y-auto">
         <table className="w-full">
-          <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+          <thead className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
             <tr>
               <th className="px-6 py-3 text-left">
                 <button
@@ -264,7 +271,7 @@ export const DriverTable = ({ drivers, isLoading }) => {
       </div>
 
       {filteredAndSortedDrivers.length === 0 && (
-        <div className="p-8 text-center text-gray-500">
+        <div className="p-8 text-center text-gray-500 dark:text-gray-400">
           No drivers found matching your criteria
         </div>
       )}
