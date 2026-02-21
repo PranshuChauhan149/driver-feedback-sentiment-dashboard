@@ -19,7 +19,7 @@ export const FeedbackPage = () => {
   const submitMutation = useSubmitFeedback();
 
   const [currentStep, setCurrentStep] = useState(0);
-  const [feedbackData, setFeedbackData] = useState<Record<EntityType, FeedbackItem | null>>({
+  const [feedbackData, setFeedbackData] = useState({
     driver: null,
     trip: null,
     app: null,
@@ -37,7 +37,7 @@ export const FeedbackPage = () => {
 
   const enabledEntities = Object.entries(featureFlags)
     .filter(([_, enabled]) => enabled)
-    .map(([key]) => key.replace('Feedback', '') as EntityType);
+    .map(([key]) => key.replace('Feedback', ''));
 
   const steps = enabledEntities.map((entity) => ENTITY_LABELS[entity]);
 
