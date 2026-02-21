@@ -104,24 +104,24 @@ export const DriverTable = ({ drivers, isLoading }) => {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-between">
             <div className="relative flex-1 max-w-md">
-            <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input
-              type="text"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              placeholder="Search by name or ID..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg 
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="text"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                placeholder="Search by name or ID..."
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg 
                        focus:ring-2 focus:ring-primary-500 focus:border-primary-500
                        bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500"
-              aria-label="Search drivers"
-            />
+                aria-label="Search drivers"
+              />
             </div>
             <div className="flex gap-2">
-            {["all", "high", "medium", "low"].map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setScoreFilter(filter)}
-                className={`
+              {["all", "high", "medium", "low"].map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setScoreFilter(filter)}
+                  className={`
                   px-3 py-2 text-sm font-medium rounded-lg transition-colors
                   ${
                     scoreFilter === filter
@@ -129,16 +129,16 @@ export const DriverTable = ({ drivers, isLoading }) => {
                       : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                   }
                 `}
-              >
-                {filter === "all"
-                  ? "All"
-                  : filter === "high"
-                    ? "≥ 4.0"
-                    : filter === "medium"
-                      ? "2.5-3.9"
-                      : "< 2.5"}
-              </button>
-            ))}
+                >
+                  {filter === "all"
+                    ? "All"
+                    : filter === "high"
+                      ? "≥ 4.0"
+                      : filter === "medium"
+                        ? "2.5-3.9"
+                        : "< 2.5"}
+                </button>
+              ))}
             </div>
           </div>
         </div>

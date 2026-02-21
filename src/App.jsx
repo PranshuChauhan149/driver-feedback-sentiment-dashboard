@@ -8,10 +8,12 @@ import {
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Navbar } from "./components/common/Navbar";
+
 import { ToastContainer } from "./components/common/Toast";
 import { lazy, Suspense, useEffect } from "react";
 import { useAppStore } from "./stores/appStore";
 import { AnimatePresence, motion } from "framer-motion";
+import Footer from "./components/common/Footer";
 
 // Lazy load pages for code splitting
 const DashboardPage = lazy(() =>
@@ -89,10 +91,15 @@ function App() {
 
   useEffect(() => {
     const root = document.documentElement;
+    const body = document.body;
     if (theme === "dark") {
       root.classList.add("dark");
+      body.classList.add("dark");
+      root.style.colorScheme = "dark";
     } else {
       root.classList.remove("dark");
+      body.classList.remove("dark");
+      root.style.colorScheme = "light";
     }
   }, [theme]);
 
@@ -106,6 +113,7 @@ function App() {
               <AnimatedRoutes />
             </Suspense>
           </main>
+          <Footer/>
           <ToastContainer />
         </div>
       </BrowserRouter>

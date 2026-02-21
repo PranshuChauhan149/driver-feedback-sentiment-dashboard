@@ -60,6 +60,13 @@
   @apply outline-none ring-2 ring-primary-500 ring-offset-2;
 }
 
+/* Remove focus outline on Recharts SVG elements */
+.no-chart-focus :focus,
+.no-chart-focus :focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* Line clamp utilities */
 .line-clamp-1 {
   overflow: hidden;

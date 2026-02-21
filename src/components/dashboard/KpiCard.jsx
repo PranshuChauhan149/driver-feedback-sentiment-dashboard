@@ -17,38 +17,44 @@ export const KpiCard = ({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 hover:shadow-md transition-shadow duration-200">
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-            {title}
-          </p>
-          <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mt-2">
-            {value}
-          </p>
-          {subtitle && (
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-              {subtitle}
+    <div className="rounded-2xl bg-gradient-to-br from-gray-200/70 to-gray-100/20 dark:from-gray-800/80 dark:to-gray-900/30 p-[1px] shadow-sm hover:shadow-md transition-shadow duration-200">
+      <div className="bg-white dark:bg-gray-900/70 rounded-2xl p-5">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1">
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+              {title}
             </p>
-          )}
-          {trend && (
-            <div className="flex items-center gap-1 mt-2">
-              <span
-                className={`text-sm font-medium ${
-                  trend.isPositive ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {trend.isPositive ? "↑" : "↓"} {Math.abs(trend.value)}%
-              </span>
-              <span className="text-xs text-gray-500 dark:text-gray-400">
-                vs last period
-              </span>
+            <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mt-2">
+              {value}
+            </p>
+            {subtitle && (
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                {subtitle}
+              </p>
+            )}
+            {trend && (
+              <div className="flex items-center gap-1 mt-2">
+                <span
+                  className={`text-sm font-medium ${
+                    trend.isPositive ? "text-green-600" : "text-red-600"
+                  }`}
+                >
+                  {trend.isPositive ? "↑" : "↓"} {Math.abs(trend.value)}%
+                </span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  vs last period
+                </span>
+              </div>
+            )}
+          </div>
+          {icon && (
+            <div
+              className={`p-3 rounded-xl ring-1 ring-black/5 dark:ring-white/10 ${colorClasses[color]}`}
+            >
+              {icon}
             </div>
           )}
         </div>
-        {icon && (
-          <div className={`p-3 rounded-lg ${colorClasses[color]}`}>{icon}</div>
-        )}
       </div>
     </div>
   );
