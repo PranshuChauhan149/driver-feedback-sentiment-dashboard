@@ -56,13 +56,31 @@ export const FeedbackPage = () => {
 
   const handleNext = () => {
     if (currentStep < enabledEntities.length - 1) {
-      setCurrentStep(currentStep + 1);
+      const nextStep = currentStep + 1;
+      const nextEntity = enabledEntities[nextStep];
+
+      // Clear the next step's input fields
+      setFeedbackData((prev) => ({
+        ...prev,
+        [nextEntity]: null,
+      }));
+
+      setCurrentStep(nextStep);
     }
   };
 
   const handlePrevious = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      const previousStep = currentStep - 1;
+      const previousEntity = enabledEntities[previousStep];
+
+      // Clear the previous step's input fields
+      setFeedbackData((prev) => ({
+        ...prev,
+        [previousEntity]: null,
+      }));
+
+      setCurrentStep(previousStep);
     }
   };
 
@@ -87,7 +105,7 @@ export const FeedbackPage = () => {
       setIsSubmitted(true);
       setHasSubmitted(true);
     } catch (error) {
-      console.error("Submission error:", error);
+      // Submission error handled
     }
   };
 
@@ -137,7 +155,6 @@ export const FeedbackPage = () => {
             className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 
                      focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
                      transition-colors duration-150"
-            disabled={hasSubmitted}
           >
             Submit Another Feedback
           </button>

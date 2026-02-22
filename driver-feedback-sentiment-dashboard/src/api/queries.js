@@ -40,10 +40,10 @@ export const useAlerts = () => {
   });
 };
 
-export const useSentimentSummary = () => {
+export const useSentimentSummary = (dateRange = "30d") => {
   return useQuery({
-    queryKey: ["sentimentSummary"],
-    queryFn: mockApi.getSentimentSummary,
+    queryKey: ["sentimentSummary", dateRange],
+    queryFn: () => mockApi.getSentimentSummary(dateRange),
     refetchInterval: 30000,
   });
 };

@@ -139,13 +139,26 @@ export const mockApi = {
       score: parseFloat((2 + Math.random() * 3).toFixed(2)),
     }));
 
-    // Calculate tag frequency
-    const tagCounts = {};
-    driverFeedback.forEach((f) => {
-      f.tags.forEach((tag) => {
-        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    // Calculate tag frequency - ensure we have data even if driverFeedback is empty
+    let tagCounts = {};
+    if (driverFeedback.length > 0) {
+      driverFeedback.forEach((f) => {
+        f.tags.forEach((tag) => {
+          tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+        });
       });
-    });
+    } else {
+      // Provide default tag data if no feedback exists
+      tagCounts = {
+        "safe-driving": 8,
+        professional: 7,
+        "on-time": 6,
+        "clean-vehicle": 5,
+        polite: 4,
+        "very-polite": 3,
+        comfortable: 2,
+      };
+    }
 
     const tagFrequency = Object.entries(tagCounts)
       .map(([tag, count]) => ({
@@ -180,37 +193,55 @@ export const mockApi = {
       }));
   },
 
-  getSentimentSummary: async () => {
+  getSentimentSummary: async (dateRange = "30d") => {
     await delay(300);
-    const positive = mockFeedback.filter(
+
+    // Filter feedback based on date range
+    const now = new Date();
+    const filteredFeedback = mockFeedback.filter((f) => {
+      const feedbackDate = new Date(f.timestamp);
+      const diffTime = now - feedbackDate;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if (dateRange === "today") return diffDays === 0;
+      if (dateRange === "7d") return diffDays <= 7;
+      if (dateRange === "30d") return diffDays <= 30;
+      return true;
+    });
+
+    const positive = filteredFeedback.filter(
       (f) => f.sentiment === "positive",
     ).length;
-    const neutral = mockFeedback.filter(
+    const neutral = filteredFeedback.filter(
       (f) => f.sentiment === "neutral",
     ).length;
-    const negative = mockFeedback.filter(
+    const negative = filteredFeedback.filter(
       (f) => f.sentiment === "negative",
     ).length;
-    const total = mockFeedback.length;
+    const total = filteredFeedback.length || 1; // Prevent division by zero
 
-    const totalScore = mockFeedback.reduce((sum, f) => sum + f.rating, 0);
+    const totalScore = filteredFeedback.reduce((sum, f) => sum + f.rating, 0);
     const averageScore = parseFloat((totalScore / total).toFixed(2));
 
-    const driversAboveThreshold = mockDrivers.filter(
-      (d) => d.averageScore >= 4.0,
-    ).length;
-    const driversBelowThreshold = mockDrivers.filter(
-      (d) => d.averageScore < 2.5,
-    ).length;
+    // Apply multiplier based on date range for demo purposes
+    const multiplier =
+      dateRange === "today" ? 0.3 : dateRange === "7d" ? 0.6 : 1;
+    const adjustedTotal = Math.round(total * multiplier);
+    const adjustedAbove = Math.round(
+      mockDrivers.filter((d) => d.averageScore >= 4.0).length * multiplier,
+    );
+    const adjustedBelow = Math.round(
+      mockDrivers.filter((d) => d.averageScore < 2.5).length * multiplier,
+    );
 
     return {
-      total,
-      positive,
-      neutral,
-      negative,
+      total: adjustedTotal,
+      positive: Math.round(positive * multiplier),
+      neutral: Math.round(neutral * multiplier),
+      negative: Math.round(negative * multiplier),
       averageScore,
-      driversAboveThreshold,
-      driversBelowThreshold,
+      driversAboveThreshold: adjustedAbove,
+      driversBelowThreshold: adjustedBelow,
     };
   },
 

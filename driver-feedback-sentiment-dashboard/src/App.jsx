@@ -105,7 +105,12 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
           <Navbar />
           <main className="pb-12">
@@ -113,7 +118,7 @@ function App() {
               <AnimatedRoutes />
             </Suspense>
           </main>
-          <Footer/>
+          <Footer />
           <ToastContainer />
         </div>
       </BrowserRouter>

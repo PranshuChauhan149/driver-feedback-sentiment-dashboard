@@ -14,6 +14,9 @@ import {
 } from "@heroicons/react/24/solid";
 
 export const DashboardPage = () => {
+  const selectedDateRange = useAppStore((state) => state.selectedDateRange);
+  const setDateRange = useAppStore((state) => state.setDateRange);
+
   const {
     data: drivers = [],
     isLoading: driversLoading,
@@ -31,10 +34,7 @@ export const DashboardPage = () => {
     isLoading: summaryLoading,
     error: summaryError,
     refetch: refetchSummary,
-  } = useSentimentSummary();
-
-  const selectedDateRange = useAppStore((state) => state.selectedDateRange);
-  const setDateRange = useAppStore((state) => state.setDateRange);
+  } = useSentimentSummary(selectedDateRange);
 
   const isLoading = driversLoading || feedbackLoading || summaryLoading;
   const hasError = driversError || feedbackError || summaryError;

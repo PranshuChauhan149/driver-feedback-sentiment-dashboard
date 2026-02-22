@@ -39,18 +39,7 @@ export default function Footer() {
             >
               Feedback
             </a>
-            <a
-              href="#"
-              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition"
-            >
-              Documentation
-            </a>
-            <a
-              href="#"
-              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition"
-            >
-              Support
-            </a>
+            
           </nav>
         </div>
 
