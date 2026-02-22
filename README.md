@@ -21,7 +21,7 @@ This application helps organizations monitor driver performance, identify trends
 
 🛠️ Tech Stack
 
-React + TypeScript
+React 
 
 Vite
 
